@@ -1,0 +1,51 @@
+@media screen and (min-width: 1600px) { 
+    .main{
+        width: 1290px;
+    }
+    .header {
+        background-size: 100%;
+    }
+    .tab-container .tab-item {
+        width: 217px;
+    }
+    .tab-container.aids .tab-item:last-child {
+        width: 138px;
+    }
+    .hover-wrapper {
+
+	    margin-left: 2px;
+	    /* display: none; */
+	}
+    .section-left {
+        /* float: left; */
+        width: 604px;
+        margin-left: 48px;
+    }
+    .section-right {
+        /* float: right; */
+        width: 510px;
+        margin-right: 60px;
+        /* height: 400px; */
+        /* background: blue; */
+    }
+    .section-fixed.right.fixed {
+
+        margin-left: 1299px;
+    }
+    /* 二级页 */
+    .list-header.right .list-header-content {
+        width: 360px;
+        /* font-size: 14px; */
+        /* height: 100%; */
+    }
+    /* 三级页 */
+    .level-three-page .section-left {
+        float: none;
+        width: 93%;
+    }
+    .level-three-page .list-header .list-header-content {
+        width: 994px;
+        /* font-size: 14px; */
+        /* height: 100%; */
+    }
+}
