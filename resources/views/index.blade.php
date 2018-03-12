@@ -4,12 +4,14 @@
         <div class="section-left">
             <div class="swiper-container">
                 <div class="section swiper-wrapper">
-@foreach($banners as $banner)
                     <div class="swiper-slide">
-                        <div class="slide-img"><img src="{{env('APP_URL').$banner->image}}" alt=""></div>
-                        <div class="slide-title">{{$banner->title}}</div>
+                        @foreach($banners as $banner)
+
+                            <div class="slide-img"><img src="{{env('APP_URL').$banner->image}}" alt=""></div>
+                            <div class="slide-title">{{$banner->title}}</div>
+                        @endforeach
+
                     </div>
-@endforeach
 
                 </div>
                 <div class="swiper-button-prev"></div>
