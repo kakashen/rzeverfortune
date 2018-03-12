@@ -75,7 +75,7 @@ class BannerController extends Controller
 
             $grid->id('ID')->sortable();
             $grid->title('标题');
-            $grid->image('图片')->image('http://www.rzeverfortune.test/', 100, 100);
+            $grid->image('图片')->image(env('APP_URL'), 100, 100);
             $grid->sort('排序');
             $grid->created_at();
             $grid->updated_at();
