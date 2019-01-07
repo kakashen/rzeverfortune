@@ -5,27 +5,30 @@ namespace App\Admin\Controllers;
 use App\Http\Controllers\Controller;
 use App\Sports;
 use Encore\Admin\Facades\Admin;
+use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
-use Illuminate\Http\Request;
+use Encore\Admin\Controllers\ModelForm;
 
 class SportsController extends Controller
 {
-    /**
-     * Index interface.
-     *
-     * @return Content
-     */
-    public function index()
-    {
-      return Admin::content(function (Content $content) {
+  use ModelForm;
 
-        $content->header('header');
-        $content->description('description');
+  /**
+   * Index interface.
+   *
+   * @return Content
+   */
+  public function index()
+  {
+    return Admin::content(function (Content $content) {
 
-        $content->body($this->grid());
-      });
-    }
+      $content->header('header');
+      $content->description('description');
+
+      $content->body($this->grid());
+    });
+  }
 
   /**
    * Make a grid builder.
@@ -39,79 +42,70 @@ class SportsController extends Controller
       $grid->id('ID')->sortable();
       $grid->name('推荐人');
       $grid->recommended_at('推荐日期');
-      $grid->host('排序');
-      $grid->guest();
-      $grid->first();
-      $grid->last();
-      $grid->recommend();
-      $grid->chain();
-      $grid->remark();
+      $grid->host('主队');
+      $grid->guest('客队');
+      $grid->first('初盘');
+      $grid->last('终盘');
+      $grid->recommend('推荐');
+      $grid->chain('串子');
+      $grid->remark('备注');
     });
   }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+  /**
+   * Make a form builder.
+   *
+   * @return Form
+   */
+  protected function form()
+  {
+    return Admin::form(Sports::class, function (Form $form) {
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+      $form->display('id', 'ID');
+      $form->text('name', '推荐人');
+      $form->date('recommended_at', '推荐日期');
+      $form->text('host', '主队');
+      $form->text('guest', '客队');
+      $form->text('first', '初盘');
+      $form->text('last', '终盘');
+      $form->text('recommend', '推荐');
+      $form->text('chain', '串子');
+      $form->text('remark', '备注');
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Sports  $sports
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Sports $sports)
-    {
-        //
-    }
+    });
+  }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Sports  $sports
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Sports $sports)
-    {
-        //
-    }
+  /**
+   * Create interface.
+   *
+   * @return Content
+   */
+  public function create()
+  {
+    return Admin::content(function (Content $content) {
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Sports  $sports
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Sports $sports)
-    {
-        //
-    }
+      $content->header('header');
+      $content->description('description');
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Sports  $sports
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Sports $sports)
-    {
-        //
-    }
+      $content->body($this->form());
+    });
+  }
+
+
+  /**
+   * Edit interface.
+   *
+   * @param $id
+   * @return Content
+   */
+  public function edit($id)
+  {
+    return Admin::content(function (Content $content) use ($id) {
+
+      $content->header('header');
+      $content->description('description');
+
+      $content->body($this->form()->edit($id));
+    });
+  }
 }
