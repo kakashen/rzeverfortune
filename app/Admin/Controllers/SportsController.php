@@ -48,6 +48,9 @@ class SportsController extends Controller
       $grid->last('终盘');
       $grid->recommend('推荐');
       $grid->chain('串子');
+      $grid->money('金额');
+      $grid->result('结果');
+      $grid->red_or_black('红黑');
       $grid->remark('备注');
     });
   }
@@ -70,6 +73,7 @@ class SportsController extends Controller
       $form->text('last', '终盘');
       $form->text('recommend', '推荐');
       $form->text('chain', '串子');
+      $form->number('money', '下单金额');
       $form->text('remark', '备注');
 
     });
