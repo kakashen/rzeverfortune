@@ -57,7 +57,7 @@ class SportsController extends Controller
       $grid->host('主队');
       $grid->guest('客队');
       $grid->recommend('推荐');
-      $grid->money('金额');
+      $grid->money('金额')->editable();
       $grid->rate('赔率');
       $grid->result('结果')->editable();
       //$grid->red_or_black('结果')->editable();
