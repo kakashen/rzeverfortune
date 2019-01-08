@@ -14,6 +14,7 @@ Route::group([
   $router->resource('products', ProductController::class);
   $router->resource('project/banner', BannerController::class);
   $router->resource('sports/recommend', SportsController::class);
+  $router->resource('sports/recommender', RecommenderController::class);
 
 
 });

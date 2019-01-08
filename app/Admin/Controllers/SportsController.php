@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Recommender;
 use App\Sports;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
@@ -49,7 +50,9 @@ class SportsController extends Controller
       });
 
       $grid->id('ID')->sortable();
-      $grid->name('推荐人');
+      $grid->name('推荐人')->display(function ($name) {
+        return Recommender::find($name)->name ?? '未找到';
+      });
       $grid->recommended_at('推荐日期');
       $grid->host('主队');
       $grid->guest('客队');
@@ -77,7 +80,8 @@ class SportsController extends Controller
     return Admin::form(Sports::class, function (Form $form) {
 
       $form->display('id', 'ID');
-      $form->text('name', '推荐人');
+      $form->select('name', '推荐人')->options('/api/users');
+      //$form->text('name', '推荐人');
       $form->date('recommended_at', '日期');
       $form->text('host', '主队');
       $form->text('guest', '客队');

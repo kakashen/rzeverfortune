@@ -14,4 +14,10 @@
 /*Route::get('/', function () {
     return view('index');
 });*/
+
+use Illuminate\Support\Facades\DB;
+
 Route::get('/', 'IndexController@index');
+Route::get('/api/users', function () {
+  return \App\Recommender::get(['id', DB::raw('name as text')]);
+});
