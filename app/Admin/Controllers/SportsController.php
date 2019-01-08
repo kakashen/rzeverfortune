@@ -50,7 +50,8 @@ class SportsController extends Controller
       $grid->result('结果')->editable();
       //$grid->red_or_black('结果')->editable();
       $grid->red_or_black('红黑')->display(function ($red_or_black) {
-        $ret = $red_or_black == 'R' ? "<span class='label bg-red'>红</span>" : "<span class='label bg-black'>黑</span>";
+        $ret = $red_or_black == 'R' ? "<span class='label bg-red'>红</span>" :
+          ($red_or_black == 'B' ? "<span class='label bg-black'>黑</span>" : "<span class='label bg-green'>水</span>");
         return $ret;
       });
       $grid->remark('备注');
@@ -73,8 +74,23 @@ class SportsController extends Controller
       $form->text('guest', '客队');
       $form->text('recommend', '推荐');
       $form->text('rate', '赔率');
+      $form->text('result', '结果')->default(0);
       $form->number('money', '金额');
       $form->text('remark', '备注');
+
+      $form->saving(function (Form $form) {
+        //$id = $form->model()->id;
+        $result = $form->result;
+        if ($result > 0) {
+          $form->model()->update(['red_or_black' => 'R']);
+        }
+        if ($result < 0) {
+          $form->model()->update(['red_or_black' => 'B']);
+        }
+        if ($result == 0) {
+          $form->model()->update(['red_or_black' => null]);
+        }
+      });
 
     });
   }
