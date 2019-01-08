@@ -44,13 +44,15 @@ class SportsController extends Controller
       $grid->recommended_at('推荐日期');
       $grid->host('主队');
       $grid->guest('客队');
-      $grid->first('初盘');
-      $grid->last('终盘');
       $grid->recommend('推荐');
-      $grid->chain('串子');
       $grid->money('金额');
-      $grid->result('结果');
-      $grid->red_or_black('红黑');
+      $grid->rate('赔率');
+      $grid->result('结果')->editable();
+      //$grid->red_or_black('结果')->editable();
+      $grid->red_or_black('红黑')->display(function ($red_or_black) {
+        $ret = $red_or_black == 'R' ? "<span class='label bg-red'>红</span>" : "<span class='label bg-black'>黑</span>";
+        return $ret;
+      });
       $grid->remark('备注');
     });
   }
@@ -66,14 +68,12 @@ class SportsController extends Controller
 
       $form->display('id', 'ID');
       $form->text('name', '推荐人');
-      $form->date('recommended_at', '推荐日期');
+      $form->date('recommended_at', '日期');
       $form->text('host', '主队');
       $form->text('guest', '客队');
-      $form->text('first', '初盘');
-      $form->text('last', '终盘');
       $form->text('recommend', '推荐');
-      $form->text('chain', '串子');
-      $form->number('money', '下单金额');
+      $form->text('rate', '赔率');
+      $form->number('money', '金额');
       $form->text('remark', '备注');
 
     });
