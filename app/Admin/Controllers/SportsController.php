@@ -38,6 +38,15 @@ class SportsController extends Controller
   protected function grid()
   {
     return Admin::grid(Sports::class, function (Grid $grid) {
+      $grid->filter(function($filter){
+
+        // 去掉默认的id过滤器
+        $filter->disableIdFilter();
+
+        // 在这里添加字段过滤器
+        $filter->like('name', '推荐人');
+        $filter->between('recommended_at', '推荐日期')->date();
+      });
 
       $grid->id('ID')->sortable();
       $grid->name('推荐人');
@@ -78,7 +87,7 @@ class SportsController extends Controller
       $form->number('money', '金额');
       $form->text('remark', '备注');
 
-      $form->saving(function (Form $form) {
+      $form->saved(function (Form $form) {
         //$id = $form->model()->id;
         $result = $form->result;
         if ($result > 0) {
