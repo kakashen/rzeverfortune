@@ -54,9 +54,9 @@ class SportsController extends Controller
         return Recommender::find($name)->name ?? '未找到';
       });
       $grid->recommended_at('推荐日期');
-      $grid->host('主队');
-      $grid->guest('客队');
-      $grid->recommend('推荐');
+      $grid->host('主队')->editable();
+      $grid->guest('客队')->editable();
+      $grid->recommend('推荐')->editable();
       $grid->money('金额')->editable();
       $grid->rate('赔率')->editable();
       $grid->result('结果')->editable();
