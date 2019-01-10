@@ -54,11 +54,11 @@ class SportsController extends Controller
         return Recommender::find($name)->name ?? '未找到';
       });
       $grid->recommended_at('推荐日期');
-      $grid->host('主队');
-      $grid->guest('客队');
-      $grid->recommend('推荐');
-      $grid->money('金额');
-      $grid->rate('赔率');
+      $grid->host('主队')->editable();
+      $grid->guest('客队')->editable();
+      $grid->recommend('推荐')->editable();
+      $grid->money('金额')->editable();
+      $grid->rate('赔率')->editable();
       $grid->result('结果')->editable();
       //$grid->red_or_black('结果')->editable();
       $grid->red_or_black('红黑')->display(function ($red_or_black) {
@@ -82,11 +82,11 @@ class SportsController extends Controller
       $form->display('id', 'ID');
       $form->select('name', '推荐人')->options('/api/users');
       //$form->text('name', '推荐人');
-      $form->date('recommended_at', '日期');
+      $form->date('recommended_at', '日期')->default(date("Y-m-d"));
       $form->text('host', '主队');
       $form->text('guest', '客队');
       $form->text('recommend', '推荐');
-      $form->text('rate', '赔率');
+      $form->text('rate', '赔率')->default(0);
       $form->text('result', '结果')->default(0);
       $form->number('money', '金额');
       $form->text('remark', '备注');
