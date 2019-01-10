@@ -47,6 +47,7 @@ class SportsController extends Controller
         // 在这里添加字段过滤器
         $filter->equal('name', '推荐人')->select('/api/users');
         $filter->between('recommended_at', '推荐日期')->date();
+        $filter->gt('money', '金额');
       });
 
       $grid->id('ID')->sortable();
