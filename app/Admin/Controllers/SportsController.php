@@ -45,7 +45,7 @@ class SportsController extends Controller
         $filter->disableIdFilter();
 
         // 在这里添加字段过滤器
-        $filter->like('name', '推荐人');
+        $filter->equal('name', '推荐人')->select('/api/users');
         $filter->between('recommended_at', '推荐日期')->date();
       });
 
