@@ -101,7 +101,7 @@ class SportsController extends Controller
         if ($result < 0) {
           $form->model()->update(['red_or_black' => 'B']);
         }
-        if ($result == 0) {
+        if ($result === 0) {
           $form->model()->update(['red_or_black' => null]);
         }
       });
